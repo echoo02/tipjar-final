@@ -46,7 +46,7 @@ export default function Page() {
                 <ArrowRight className="h-5 w-5" />
               </Link>
               <a
-                href="https://faucet.testnet.arc.network"
+                href="https://faucet.circle.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-base font-medium hover:bg-muted transition-colors"

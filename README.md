@@ -17,7 +17,7 @@ A decentralized tipping platform built on Arc Testnet that enables creators, dev
 
 - Node.js 18+ and pnpm
 - A Web3 wallet (MetaMask, Rabby, OKX Wallet, etc.)
-- Arc Testnet ETH for gas fees (get from [Arc Testnet Faucet](https://faucet.testnet.arc.network))
+- Arc Testnet ETH for gas fees (get from [Arc Testnet Faucet](https://faucet.circle.com/))
 - USDC tokens on Arc Testnet
 
 ### Installation
@@ -118,8 +118,8 @@ lib/
 
 - **Chain ID**: 5042002
 - **RPC URL**: https://rpc.testnet.arc.network
-- **Explorer**: https://explorer.testnet.arc.network
-- **Faucet**: https://faucet.testnet.arc.network
+- **Explorer**: https://testnet.arcscan.app
+- **Faucet**: https://faucet.circle.com/
 - **USDC Address**: 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913 (Arc Testnet)
 
 ## Key Features Implementation
@@ -174,7 +174,7 @@ The app uses the following environment variables (configured via wagmi):
 
 ## Testing Tips
 
-1. **Get Testnet ETH**: Visit the [Arc Testnet Faucet](https://faucet.testnet.arc.network)
+1. **Get Testnet ETH**: Visit the [Arc Testnet Faucet](https://faucet.circle.com/)
 2. **Get Testnet USDC**: Bridge or swap ETH for USDC on Arc Testnet
 3. **Test Tipping**: Create a second wallet/account to test sending tips
 4. **Profile Testing**: Switch between wallets to test different creator profiles

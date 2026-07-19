@@ -21,7 +21,7 @@ export const ARC_TESTNET = {
   blockExplorers: {
     default: {
       name: 'Arc Explorer',
-      url: 'https://explorer.testnet.arc.network',
+      url: 'https://testnet.arcscan.app',
     },
   },
   testnet: true,
@@ -36,5 +36,5 @@ export const USDC_ARC = {
 }
 
 // Arc Testnet Faucet Info
-export const ARC_FAUCET_URL = 'https://faucet.testnet.arc.network'
-export const ARC_EXPLORER_URL = 'https://explorer.testnet.arc.network'
+export const ARC_FAUCET_URL = 'https://faucet.circle.com/'
+export const ARC_EXPLORER_URL = 'https://testnet.arcscan.app'
