@@ -2,12 +2,24 @@
 
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { useAccount } from 'wagmi'
+import { useUSDCBalance } from '@/lib/hooks'
+import { Loader2 } from 'lucide-react'
 
 export function WalletConnectButton() {
-  const { isConnected } = useAccount()
+  const { isConnected, address } = useAccount()
+  const { balance: usdcBalance, isLoading } = useUSDCBalance(address)
 
   return (
-    <div className="flex justify-end">
+    <div className="flex items-center justify-end gap-4">
+      {isConnected && (
+        <div className="rounded-lg bg-muted px-4 py-2 text-sm font-medium">
+          {isLoading ? (
+            <Loader2 className="h-4 w-4 animate-spin inline" />
+          ) : (
+            <span>USDC: {parseFloat(usdcBalance).toFixed(2)}</span>
+          )}
+        </div>
+      )}
       <ConnectButton />
     </div>
   )
