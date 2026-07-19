@@ -10,11 +10,11 @@ export function useUSDCBalance(address?: string) {
   const targetAddress = address || connectedAddress
 
   const { data, isLoading, isError } = useReadContract({
-    address: USDC_ARC.address,
+    address: USDC_ARC.address as `0x${string}`,
     abi: USDC_ABI,
     functionName: 'balanceOf',
-    args: [targetAddress as `0x${string}`],
-    query: { enabled: !!targetAddress },
+    args: targetAddress ? [targetAddress as `0x${string}`] : undefined,
+    account: targetAddress as `0x${string}`,
   }) as any
 
   return {
@@ -69,11 +69,11 @@ export function useUSDCApproval(
   const [allowance, setAllowance] = useState<bigint>(0n)
 
   const { data: allowanceData } = useReadContract({
-    address: USDC_ARC.address,
+    address: USDC_ARC.address as `0x${string}`,
     abi: USDC_ABI,
     functionName: 'allowance',
-    args: [address as `0x${string}`, spender],
-    query: { enabled: !!address && !!spender },
+    args: address && spender ? [address as `0x${string}`, spender] : undefined,
+    account: address as `0x${string}`,
   }) as any
 
   useEffect(() => {
