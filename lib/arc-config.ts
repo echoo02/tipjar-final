@@ -29,7 +29,7 @@ export const ARC_TESTNET = {
 
 // USDC Token Configuration on Arc Testnet
 export const USDC_ARC = {
-  address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913' as const,
+  address: '0x3600000000000000000000000000000000000000' as const,
   decimals: 6,
   name: 'USDC',
   symbol: 'USDC',

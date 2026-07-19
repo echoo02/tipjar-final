@@ -120,7 +120,7 @@ lib/
 - **RPC URL**: https://rpc.testnet.arc.network
 - **Explorer**: https://testnet.arcscan.app
 - **Faucet**: https://faucet.circle.com/
-- **USDC Address**: 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913 (Arc Testnet)
+- **USDC Address**: 0x3600000000000000000000000000000000000000 (Arc Testnet)
 
 ## Key Features Implementation
 

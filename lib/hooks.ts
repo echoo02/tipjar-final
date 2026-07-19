@@ -14,12 +14,11 @@ export function useUSDCBalance(address?: string) {
     abi: USDC_ABI,
     functionName: 'balanceOf',
     args: targetAddress ? [targetAddress as `0x${string}`] : undefined,
-    account: targetAddress as `0x${string}`,
   }) as any
 
   return {
-    balance: data ? formatUnits(data, USDC_ARC.decimals) : '0',
-    balanceBigInt: data || 0n,
+    balance: data ? formatUnits(data as bigint, USDC_ARC.decimals) : '0',
+    balanceBigInt: (data as bigint) || 0n,
     isLoading,
     isError,
   }
@@ -73,12 +72,11 @@ export function useUSDCApproval(
     abi: USDC_ABI,
     functionName: 'allowance',
     args: address && spender ? [address as `0x${string}`, spender] : undefined,
-    account: address as `0x${string}`,
   }) as any
 
   useEffect(() => {
     if (allowanceData) {
-      setAllowance(allowanceData)
+      setAllowance(allowanceData as bigint)
     }
   }, [allowanceData])
 
