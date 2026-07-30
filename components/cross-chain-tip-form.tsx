@@ -16,6 +16,7 @@ import {
   addressToBytes32,
   getMessageDomain,
 } from '@/lib/cctp-utils'
+import { TransactionReceipt } from './transaction-receipt'
 
 interface CrossChainTipFormProps {
   creatorAddress: string
@@ -166,22 +167,25 @@ export function CrossChainTipForm({
       <h3 className="text-lg font-semibold">Send Cross-Chain Tip</h3>
 
       {hash && (
-        <div className="rounded-lg bg-green-50 p-4 dark:bg-green-950">
-          <p className="text-sm text-green-800 dark:text-green-200">
-            Bridge initiated! Monitor on{' '}
-            <a
-              href={`${sourceChain?.explorer}/tx/${hash}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-mono hover:underline"
-            >
-              {sourceChain?.name} Explorer
-            </a>
-          </p>
-          <p className="mt-2 text-xs text-green-700 dark:text-green-300">
-            The attestation will complete within ~30 seconds. Message will be
-            delivered to {destinationChain?.name}.
-          </p>
+        <div className="space-y-4">
+          <TransactionReceipt
+            hash={hash}
+            amount={tipAmount}
+            senderAddress={address || ''}
+            receiverAddress={creatorAddress}
+            explorerUrl={sourceChain?.explorer || ''}
+            chainName={`${sourceChain?.name} → ${destinationChain?.name}`}
+            isLoading={isTxLoading}
+          />
+          <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-900 dark:bg-blue-950/30">
+            <p className="text-sm text-blue-900 dark:text-blue-100">
+              <strong>Cross-Chain Transfer in Progress:</strong>
+            </p>
+            <p className="mt-1 text-xs text-blue-700 dark:text-blue-300">
+              The attestation will complete within ~30 seconds. Your USDC will be minted on{' '}
+              <strong>{destinationChain?.name}</strong> and delivered to the recipient.
+            </p>
+          </div>
         </div>
       )}
 
