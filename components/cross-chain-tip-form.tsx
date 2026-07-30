@@ -29,6 +29,7 @@ export function CrossChainTipForm({
 }: CrossChainTipFormProps) {
   const { address, isConnected, chainId: userChainId } = useAccount()
   const [tipAmount, setTipAmount] = useState('')
+  const [submittedAmount, setSubmittedAmount] = useState('')
   const [message, setMessage] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [selectedSourceChain, setSelectedSourceChain] = useState<number>(
@@ -121,6 +122,7 @@ export function CrossChainTipForm({
       return
     }
 
+    setSubmittedAmount(tipAmount)
     setIsBridging(true)
 
     // Get message domain for destination
@@ -170,7 +172,7 @@ export function CrossChainTipForm({
         <div className="space-y-4">
           <TransactionReceipt
             hash={hash}
-            amount={tipAmount}
+            amount={submittedAmount}
             senderAddress={address || ''}
             receiverAddress={creatorAddress}
             explorerUrl={sourceChain?.explorer || ''}

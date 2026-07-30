@@ -16,6 +16,7 @@ interface TipFormProps {
 export function TipForm({ creatorAddress }: TipFormProps) {
   const { address, isConnected } = useAccount()
   const [tipAmount, setTipAmount] = useState('')
+  const [submittedAmount, setSubmittedAmount] = useState('')
   const [message, setMessage] = useState('')
   const [error, setError] = useState<string | null>(null)
 
@@ -45,6 +46,7 @@ export function TipForm({ creatorAddress }: TipFormProps) {
       return
     }
 
+    setSubmittedAmount(tipAmount)
     writeContract({
       address: USDC_ARC.address,
       abi: USDC_ABI,
@@ -81,7 +83,7 @@ export function TipForm({ creatorAddress }: TipFormProps) {
       {hash && (
         <TransactionReceipt
           hash={hash}
-          amount={tipAmount}
+          amount={submittedAmount}
           senderAddress={address || ''}
           receiverAddress={creatorAddress}
           explorerUrl={ARC_EXPLORER_URL}
