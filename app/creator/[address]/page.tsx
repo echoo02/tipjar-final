@@ -3,16 +3,19 @@
 import { WalletConnectButton } from '@/components/wallet-connect-button'
 import { CreatorProfile } from '@/components/creator-profile'
 import { TipForm } from '@/components/tip-form'
+import { CrossChainTipForm } from '@/components/cross-chain-tip-form'
 import { useAccount } from 'wagmi'
 import { useParams } from 'next/navigation'
 import { isAddress } from 'viem'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { ARC_EXPLORER_URL } from '@/lib/arc-config'
+import { useState } from 'react'
 
 export default function CreatorPage() {
   const { address: creatorAddress } = useParams() as { address: string }
   const { address: connectedAddress } = useAccount()
+  const [tipMode, setTipMode] = useState<'single' | 'cross-chain'>('single')
 
   // Validate address format
   if (!isAddress(creatorAddress)) {
@@ -86,7 +89,38 @@ export default function CreatorPage() {
                 </p>
               </div>
             ) : (
-              <TipForm creatorAddress={creatorAddress} />
+              <div className="space-y-4">
+                {/* Tab Selection */}
+                <div className="flex gap-2 rounded-lg border border-border bg-muted p-1">
+                  <button
+                    onClick={() => setTipMode('single')}
+                    className={`flex-1 rounded px-3 py-2 text-sm font-medium transition-colors ${
+                      tipMode === 'single'
+                        ? 'bg-background text-foreground shadow-sm'
+                        : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    Single Chain
+                  </button>
+                  <button
+                    onClick={() => setTipMode('cross-chain')}
+                    className={`flex-1 rounded px-3 py-2 text-sm font-medium transition-colors ${
+                      tipMode === 'cross-chain'
+                        ? 'bg-background text-foreground shadow-sm'
+                        : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    Cross-Chain
+                  </button>
+                </div>
+
+                {/* Forms */}
+                {tipMode === 'single' ? (
+                  <TipForm creatorAddress={creatorAddress} />
+                ) : (
+                  <CrossChainTipForm creatorAddress={creatorAddress} />
+                )}
+              </div>
             )}
           </div>
         </div>

@@ -7,6 +7,7 @@ import { USDC_ARC, ARC_EXPLORER_URL, ARC_FAUCET_URL } from '@/lib/arc-config'
 import { USDC_ABI } from '@/lib/usdc-abi'
 import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
+import { TransactionReceipt } from './transaction-receipt'
 
 interface TipFormProps {
   creatorAddress: string
@@ -15,6 +16,7 @@ interface TipFormProps {
 export function TipForm({ creatorAddress }: TipFormProps) {
   const { address, isConnected } = useAccount()
   const [tipAmount, setTipAmount] = useState('')
+  const [submittedAmount, setSubmittedAmount] = useState('')
   const [message, setMessage] = useState('')
   const [error, setError] = useState<string | null>(null)
 
@@ -44,6 +46,7 @@ export function TipForm({ creatorAddress }: TipFormProps) {
       return
     }
 
+    setSubmittedAmount(tipAmount)
     writeContract({
       address: USDC_ARC.address,
       abi: USDC_ABI,
@@ -78,19 +81,15 @@ export function TipForm({ creatorAddress }: TipFormProps) {
       <h3 className="text-lg font-semibold">Send a Tip</h3>
 
       {hash && (
-        <div className="rounded-lg bg-green-50 p-4 dark:bg-green-950">
-          <p className="text-sm text-green-800 dark:text-green-200">
-            Transaction submitted! Hash:{' '}
-            <a
-              href={`${ARC_EXPLORER_URL}/tx/${hash}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-mono hover:underline"
-            >
-              {hash.slice(0, 10)}...
-            </a>
-          </p>
-        </div>
+        <TransactionReceipt
+          hash={hash}
+          amount={submittedAmount}
+          senderAddress={address || ''}
+          receiverAddress={creatorAddress}
+          explorerUrl={ARC_EXPLORER_URL}
+          chainName="Arc Testnet"
+          isLoading={isTxLoading}
+        />
       )}
 
       {error && (

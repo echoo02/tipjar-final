@@ -62,7 +62,14 @@ export default function Dashboard() {
 
             {/* Search & Tip Section */}
             <div className="space-y-4">
-              <h2 className="text-2xl font-bold">Send Tips</h2>
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-bold">Send Tips</h2>
+                <div className="rounded-lg bg-blue-50 px-3 py-1 dark:bg-blue-950">
+                  <span className="text-xs font-medium text-blue-800 dark:text-blue-200">
+                    Now with Cross-Chain Support! 🌉
+                  </span>
+                </div>
+              </div>
 
               <form onSubmit={handleSearch} className="rounded-lg border border-border bg-card p-6">
                 <label className="block text-sm font-medium mb-3">
